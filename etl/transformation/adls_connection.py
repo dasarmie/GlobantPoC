@@ -2,7 +2,7 @@
 import io
 import requests
 from datetime import datetime, timedelta
-from azure.storage.blob import BlobClient, generate_blob_sas, BlobSasPermissions
+from azure.storage.blob import generate_blob_sas, BlobSasPermissions, BlobServiceClient
 
 # Set up Azure Datalake Storage
 account_name = 'adlsglobantpoc'
@@ -28,3 +28,10 @@ def read_file_adls(directory, file_name):
     path_adls_io = io.StringIO(path_adls_text)
 
     return path_adls_io
+
+def upload_file_adls(file_path, directory):
+    blob_services = BlobServiceClient.from_connection_string(connect_str)
+    blob_client = blob_services.get_blob_client(container=container_name, blob=directory)
+    with open(file_path, 'rb') as data:
+        blob_client.upload_blob(data)
+        print(f"upload {directory}")
