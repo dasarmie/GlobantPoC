@@ -32,6 +32,9 @@ def read_file_adls(directory, file_name):
 def upload_file_adls(file_path, directory):
     blob_services = BlobServiceClient.from_connection_string(connect_str)
     blob_client = blob_services.get_blob_client(container=container_name, blob=directory)
-    with open(file_path, 'rb') as data:
-        blob_client.upload_blob(data)
-        print(f"upload {directory}")
+    if blob_client.exists():
+        blob_client.delete_blob()
+    else:
+        with open(file_path, 'rb') as data:
+            blob_client.upload_blob(data)
+    print(f"upload {directory}")

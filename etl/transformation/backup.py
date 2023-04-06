@@ -61,6 +61,6 @@ upload_file_adls('departments.avro', 'backup/departments/departments.avro')
 
 df_hired_employees = pd.read_sql('SELECT * FROM dbo.hired_employees', db.conn)
 records_hired_employees = df_hired_employees.to_dict('records')
-with open('hired_employees.avro', 'wb') as out:
+with open('hired_employees.avro', 'wb') as data:
     writer(data, ps_hired_employees, records_hired_employees)
 upload_file_adls('hired_employees.avro', 'backup/hired_employees/hired_employees.avro')
