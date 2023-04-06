@@ -37,4 +37,4 @@ db.insert_data_sql('dbo.jobs', columns_jobs, df_jobs)
 db.insert_data_sql('dbo.hired_employees', columns_hired_employees, df_hired_employees)
 
 # Close to connection SQL Database
-db.close()
+db.conn.close()
