@@ -12,7 +12,7 @@ FROM
 	FROM dbo.hired_employees AS he
 	LEFT JOIN dbo.departments AS d
 	ON he.department_id = d.id
-	WHERE YEAR(he.datetime) = 2021
+	WHERE YEAR(CONVERT(datetime, he.datetime, 127)) = 2021
 	GROUP BY d.id, d.department
 ) AS MeanHired);
 
@@ -22,7 +22,7 @@ SELECT d.id
 FROM dbo.hired_employees AS he
 LEFT JOIN dbo.departments AS d
 ON he.department_id = d.id
-WHERE YEAR(he.datetime) = 2021
+WHERE YEAR(CONVERT(datetime, he.datetime, 127)) = 2021
 GROUP BY d.id, d.department
 HAVING COUNT(he.id) >= @mean
 ORDER BY hired DESC

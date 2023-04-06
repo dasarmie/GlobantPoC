@@ -10,13 +10,13 @@ FROM
 	SELECT d.department
 		 , j.job
          , he.id
-		 , CONCAT('Q', DATEPART(QUARTER, he.datetime)) AS quarter_year
+		 , CONCAT('Q', DATEPART(QUARTER, CONVERT(datetime, he.datetime, 127))) AS quarter_year
 	FROM dbo.hired_employees AS he
 	LEFT JOIN dbo.departments AS d
 	ON he.department_id = d.id
 	LEFT JOIN dbo.jobs AS j
 	ON he.job_id = j.id
-	WHERE YEAR(he.datetime) = 2021
+	WHERE YEAR(CONVERT(datetime, he.datetime, 127)) = 2021
 ) AS Employees
 PIVOT
 (

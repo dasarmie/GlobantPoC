@@ -4,7 +4,7 @@
 	*/
 CREATE TABLE departments
 (
-	id INT IDENTITY PRIMARY KEY,
+	id INT NOT NULL,
 	department NVARCHAR(128) NOT NULL
 )
 
@@ -14,7 +14,7 @@ CREATE TABLE departments
 	*/
 CREATE TABLE jobs
 (
-	id INT IDENTITY PRIMARY KEY,
+	id INT NOT NULL,
 	job NVARCHAR(128) NOT NULL
 )
 -- Create table hired_employees
@@ -27,9 +27,9 @@ CREATE TABLE jobs
 
 CREATE TABLE hired_employees
 (
-	id INT IDENTITY PRIMARY KEY,
+	id INT NOT NULL,
 	name NVARCHAR(256) NOT NULL,
-	datetime DATETIME2, 
-	department_id INT REFERENCES departments(id),
-	job_id INT REFERENCES jobs(id)
+	datetime NVARCHAR(128) NOT NULL, 
+	department_id INT NOT NULL,
+	job_id INT NOT NULL
 )
