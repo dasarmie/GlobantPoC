@@ -4,6 +4,7 @@ from fastavro import reader
 
 db = sqlConnection('sqlglobantpoc.database.windows.net', 'GlobantPoC')
 
+# Write the table name what do you need to restore
 table = 'departments'
 table_db = f"dbo.{table}"
 avro_records = []
